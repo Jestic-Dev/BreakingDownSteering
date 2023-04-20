@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace Scenes.Christian.Scripts
 {
-    public float moveSpeed;
-
-    // Update is called once per frame
-    void Update()
+    public class PlayerController : MonoBehaviour
     {
-        if(Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(-transform.right * moveSpeed * Time.deltaTime);
-        }
+        public float moveSpeed;
 
-        if (Input.GetKey(KeyCode.D))
+        // Update is called once per frame
+        void Update()
         {
-            transform.Translate(transform.right * moveSpeed * Time.deltaTime);
+            if(Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(-transform.right * moveSpeed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(transform.right * moveSpeed * Time.deltaTime);
+            }
         }
     }
 }
