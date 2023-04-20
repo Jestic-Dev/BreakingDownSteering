@@ -8,8 +8,8 @@ public class ObjectSpawner : MonoBehaviour
     public Vector3 spawnAreaSize; // The size of the spawn area
     public float spawnInterval = 1f; // The interval between spawns
     public float moveSpeed = 10f; // The speed at which the objects move
-    public float avoidDistance = 5f; // The minimum distance between objects
-    public float destroyRange = 50f; // The maximum range at which objects are destroyed
+    public float avoidDistance = 5f; // The minimum distance between objects when spawning
+    public float destroyRange = 50f; // The maximum distance from player at which objects are destroyed
     public Vector3 flyDirection = Vector3.right; // The direction in which the objects should fly
 
     private List<GameObject> spawnedObjects = new List<GameObject>();

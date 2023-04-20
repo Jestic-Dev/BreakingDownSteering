@@ -1,34 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class SpawnEnv : MonoBehaviour
+public class ObstacleSpawner : MonoBehaviour
 {
     public GameObject obstaclePrefab;
-    public int numberOfObstacles = 10;
-    public float spawnRadius = 10f;
-    public Vector3 spawnDirection = Vector3.forward;
-    public float obstacleSpeed = 5f;
-    public float destroyDistance = 50f; // Distance at which obstacles will be destroyed
-    public float spawnInterval = 1f; // Time interval between spawns
-    private float spawnTimer = 0f; // Time elapsed since last spawn
+    public int spawnAmount;
+    public float spawnRadius;
+    private Vector3 moveDirection = -Vector3.forward;
+    public float obstacleSpeed;
+    public float destroyDistance; // Distance at which obstacles will be destroyed
+    public float spawnInterval; // Time interval between spawns
+    private float spawnTimer; // Time elapsed since last spawn
 
     private List<GameObject> spawnedObstacles = new List<GameObject>(); // List to store references to spawned obstacles
 
-    void Start()
-    {
-        SpawnObstacles();
-    }
 
     void SpawnObstacles()
     {
-        for (int i = 0; i < numberOfObstacles; i++)
+        for (int i = 0; i < spawnAmount; i++)
         {
             Vector3 spawnPosition = GetRandomSpawnPosition();
             GameObject obstacle = Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
+            obstacle.transform.parent = transform;
             Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
             if (obstacleRigidbody != null)
             {
-                obstacleRigidbody.useGravity = false;
-                obstacleRigidbody.velocity = spawnDirection.normalized * obstacleSpeed;
+                obstacleRigidbody.velocity = moveDirection.normalized * obstacleSpeed;
                 spawnedObstacles.Add(obstacle);
             }
             else
@@ -40,7 +36,7 @@ public class SpawnEnv : MonoBehaviour
 
     Vector3 GetRandomSpawnPosition()
     {
-        Vector3 spawnPosition = Vector3.zero;
+        Vector3 spawnPosition;
         float spawnAngle = Random.Range(0f, 360f);
         float spawnDistance = Random.Range(0f, spawnRadius);
         spawnPosition = transform.position + new Vector3(spawnDistance * Mathf.Cos(spawnAngle * Mathf.Deg2Rad), 0f, spawnDistance * Mathf.Sin(spawnAngle * Mathf.Deg2Rad));
@@ -49,6 +45,14 @@ public class SpawnEnv : MonoBehaviour
 
     void Update()
     {
+        // Spawn a new obstacle if the spawn interval has elapsed
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= spawnInterval)
+        {
+            SpawnObstacles();
+            spawnTimer = 0f;
+        }
+
         // Destroy obstacles that have exceeded the destroy distance
         for (int i = spawnedObstacles.Count - 1; i >= 0; i--)
         {
@@ -60,12 +64,5 @@ public class SpawnEnv : MonoBehaviour
             }
         }
 
-        // Spawn a new obstacle if the spawn interval has elapsed
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
-        {
-            SpawnObstacles();
-            spawnTimer = 0f;
-        }
     }
 }
