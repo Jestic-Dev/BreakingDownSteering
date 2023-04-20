@@ -13,6 +13,16 @@ public class ObstacleSpawner : MonoBehaviour
 
     private List<GameObject> spawnedObstacles = new List<GameObject>(); // List to store references to spawned obstacles
 
+    public List<ObstaclePattern> easyPatterns;
+    public List<ObstaclePattern> mediumPatterns;
+    public List<ObstaclePattern> hardPatterns;
+
+    [System.Serializable]
+    public class ObstaclePattern
+    {
+        public float patternInterval;
+        public List<GameObject> patternObstacles;
+    }
 
     void SpawnObstacles()
     {
