@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class GameMaster : MonoBehaviour
 {
     public ObstacleManager obstacleManager;
-
     enum GameStates
     {
         TestSetup,
@@ -16,8 +15,9 @@ public class GameMaster : MonoBehaviour
 
     enum ControllerChoice
     {
+        None,
         LeftController,
-        RightController,
+        RightController
     }
 
     [SerializeField]
@@ -69,7 +69,7 @@ public class GameMaster : MonoBehaviour
     {
         speedModifier = 1;
         gameState = GameStates.TestSetup;
-        controllerChoice = ControllerChoice.RightController;
+        controllerChoice = ControllerChoice.None;
     }
 
     float handRotation = 0;

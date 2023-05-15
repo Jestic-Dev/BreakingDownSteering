@@ -22,7 +22,7 @@ public class MovementCondition : TestCondition
             handRotation += deadzoneAngle;
         }
 
-        objectToMove.Translate(new Vector3(-handRotation * moveSpeed * GameMaster.speedModifier * Time.deltaTime, 0, 0));
+        objectToMove.position += new Vector3(-handRotation * moveSpeed * GameMaster.speedModifier * Time.deltaTime, 0, 0);
 
         CheckObjectBounds(movementBounds);
     }
