@@ -9,9 +9,9 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM 
+    #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
-#endif
+    #endif
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
@@ -26,18 +26,16 @@ namespace StarterAssets
         public float RotationSmoothTime = 0.12f;
 
         [Tooltip("Acceleration and deceleration")]
-        public float SpeedChangeRate = 4.0f;
+        public float SpeedChangeRate = 10.0f;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
-        
-        [Space(10)]
-        [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-        public float JumpTimeout = 0.50f;
 
-        [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
-        public float FallTimeout = 0.15f;
+        
+        [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+        public float Gravity = -15.0f;
+        
 
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
@@ -51,26 +49,7 @@ namespace StarterAssets
 
         [Tooltip("What layers the character uses as ground")]
         public LayerMask GroundLayers;
-
-        [Header("Cinemachine")]
-        [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-        public GameObject CinemachineCameraTarget;
-
-        [Tooltip("How far in degrees can you move the camera up")]
-        public float TopClamp = 70.0f;
-
-        [Tooltip("How far in degrees can you move the camera down")]
-        public float BottomClamp = -30.0f;
-
-        [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-        public float CameraAngleOverride = 0.0f;
-
-        [Tooltip("For locking the camera position on all axis")]
-        public bool LockCameraPosition = false;
-
-        // cinemachine
-        private float _cinemachineTargetYaw;
-        private float _cinemachineTargetPitch;
+        
 
         // player
         private float _speed;
@@ -87,13 +66,11 @@ namespace StarterAssets
         // animation IDs
         private int _animIDSpeed;
         private int _animIDGrounded;
-        private int _animIDJump;
-        private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM 
+    #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
-#endif
+    #endif
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
@@ -107,11 +84,11 @@ namespace StarterAssets
         {
             get
             {
-#if ENABLE_INPUT_SYSTEM
+            #if ENABLE_INPUT_SYSTEM
                 return _playerInput.currentControlScheme == "KeyboardMouse";
-#else
+            #else
 				return false;
-#endif
+            #endif
             }
         }
 
@@ -127,28 +104,26 @@ namespace StarterAssets
 
         private void Start()
         {
-            _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
+        #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
-#else
+        #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
-#endif
+        #endif
 
             AssignAnimationIDs();
 
             // reset our timeouts on start
-            _jumpTimeoutDelta = JumpTimeout;
-            _fallTimeoutDelta = FallTimeout;
+            
         }
 
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-            
+ 
             GroundedCheck();
             Move();
         }
@@ -159,7 +134,7 @@ namespace StarterAssets
         {
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
+             
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
 
@@ -178,7 +153,7 @@ namespace StarterAssets
             }
         }
 
-        
+          
 
         private void Move()
         {
@@ -247,18 +222,16 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
-
         
 
-       
-
+        /*
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
             if (lfAngle > 360f) lfAngle -= 360f;
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
-
+        */
         private void OnDrawGizmosSelected()
         {
             Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
