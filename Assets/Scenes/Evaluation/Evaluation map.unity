@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 120058104}
   - component: {fileID: 120058103}
   - component: {fileID: 120058102}
+  - component: {fileID: 120058105}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -614,14 +615,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120058101}
-  m_LocalRotation: {x: 0.22196873, y: -0, z: -0, w: 0.97505385}
-  m_LocalPosition: {x: -1.8, y: 5.8, z: -7.6}
+  m_LocalRotation: {x: 0.22118685, y: -0.08176818, z: -0.018614335, w: 0.9716192}
+  m_LocalPosition: {x: 16.01, y: 19.58, z: -6.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 25.649, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.263, y: -10.65, z: -4.588}
+--- !u!114 &120058105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120058101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c378069d3928f97449b58e18f8a5b681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenName: ScreenUnity
 --- !u!1001 &124243440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9507,19 +9521,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.3
-  JumpTimeout: 0.3
-  FallTimeout: 0.15
+  Gravity: -15
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
     m_Bits: 513
-  CinemachineCameraTarget: {fileID: 6216919824157522089}
-  TopClamp: 70
-  BottomClamp: -30
-  CameraAngleOverride: 0
-  LockCameraPosition: 0
 --- !u!114 &1779190760190231038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9871,6 +9879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
+  jump: 0
   sprint: 0
   analogMovement: 0
   cursorLocked: 1
