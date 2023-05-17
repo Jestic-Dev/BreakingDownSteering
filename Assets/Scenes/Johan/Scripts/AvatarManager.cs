@@ -11,6 +11,14 @@ public class AvatarManager : MonoBehaviour
     private int animSpeedID;
     private int animMotionSpeedID;
 
+    public bool isInvincible = false;
+    public float invincibilityFlickerSpeed;
+    public float invincibilityBaseTime;
+    public float invincibilitySpeedScaler;
+
+    public GameObject characterModel;
+    public GameObject accesoryModel;
+
     private void Start()
     {
         animSpeedID = Animator.StringToHash("Speed");
@@ -43,5 +51,31 @@ public class AvatarManager : MonoBehaviour
         }
 
         previousX = transform.position.x;
+    }
+
+    public void GetHit()
+    {
+        StartCoroutine(BeInvincible());
+    }
+
+    public IEnumerator BeInvincible()
+    {
+        isInvincible = true;
+
+        float invincibilityTime = invincibilityBaseTime - invincibilitySpeedScaler * GameMaster.speedModifier;
+
+        while (invincibilityTime > 0)
+        {
+            characterModel.SetActive(!characterModel.activeSelf);
+            accesoryModel.SetActive(!accesoryModel.activeSelf);
+
+            yield return new WaitForSeconds(invincibilityFlickerSpeed);
+            invincibilityTime -= Time.deltaTime;
+        }
+
+        characterModel.SetActive(true);
+        accesoryModel.SetActive(true);
+
+        isInvincible = false;
     }
 }

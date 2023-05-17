@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class GameMaster : MonoBehaviour
 {
     public ObstacleManager obstacleManager;
+    public GameLogging gameLogger;
     enum GameStates
     {
         TestSetup,
@@ -64,12 +65,20 @@ public class GameMaster : MonoBehaviour
     public float deadzoneAngle;
 
     public static int speedModifier;
+    public void SetSpeedModifier(int newValue)
+    { 
+        GameMaster.speedModifier = newValue; 
+        gameLogger.SetSpeedModifierLevel(speedModifier); 
+    }
 
     private void Start()
     {
         speedModifier = 1;
         gameState = GameStates.TestSetup;
         controllerChoice = ControllerChoice.None;
+
+        gameLogger.SetSteeringType(testCondition.name);
+        SetSpeedModifier(1);
     }
 
     float handRotation = 0;
@@ -141,6 +150,8 @@ public class GameMaster : MonoBehaviour
         {
             ProcessRightHand();
         }
+
+        gameLogger.SetHandRotation(handRotation);
     }
 
     private void ProcessLeftHand()

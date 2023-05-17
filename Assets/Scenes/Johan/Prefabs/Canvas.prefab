@@ -405,7 +405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae746c88c6c88745bc6d0d36ade3324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setupUI: {fileID: 8338660619328833068}
   intermissionUI: {fileID: 3559138389279361119}
+  testOverUI: {fileID: 5534843744158220898}
 --- !u!1 &5534843744158220898
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7721229401233943412}
   m_Layer: 5
-  m_Name: TestOverScreen
+  m_Name: TestComnplete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -671,7 +673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2205375613826714811}
   m_Layer: 5
-  m_Name: SetupScreen
+  m_Name: Instructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
