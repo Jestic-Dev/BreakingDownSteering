@@ -50,15 +50,16 @@ public class ObstacleManager : MonoBehaviour
         List<Transform> myActiveObstacles = new List<Transform>();
 
         float routineTimer = 0;
+        float modifiedSpawnInterval = spawnInterval;
         float intervalTimer = spawnInterval;
 
         testUIManager.HideInstructions();
         gameLogger.StartLogging();
 
         //Slow speed
-        while(routineTimer < 30)
+        while(routineTimer < 25)
         {
-            if (intervalTimer >= spawnInterval && thisSequence.slowPatterns.Count != 0)
+            if (intervalTimer >= modifiedSpawnInterval && thisSequence.slowPatterns.Count != 0)
             {
                 GameObject toSpawn = thisSequence.slowPatterns[0];
                 thisSequence.slowPatterns.RemoveAt(0);
@@ -82,6 +83,7 @@ public class ObstacleManager : MonoBehaviour
         gameMaster.SetSpeedModifier(2);
         testUIManager.DisplayIntermission(true);
         routineTimer = 0;
+        modifiedSpawnInterval = spawnInterval * 0.75f;
 
         while(routineTimer < 10)
         {
@@ -92,9 +94,9 @@ public class ObstacleManager : MonoBehaviour
         testUIManager.DisplayIntermission(false);
         routineTimer = 0;
 
-        while (routineTimer < 3)
+        while (routineTimer < 25)
         {
-            if (intervalTimer >= spawnInterval && thisSequence.mediumPatterns.Count != 0)
+            if (intervalTimer >= modifiedSpawnInterval && thisSequence.mediumPatterns.Count != 0)
             {
                 GameObject toSpawn = thisSequence.mediumPatterns[0];
                 thisSequence.mediumPatterns.RemoveAt(0);
@@ -117,6 +119,7 @@ public class ObstacleManager : MonoBehaviour
         //High speed
         gameMaster.SetSpeedModifier(3);
         testUIManager.DisplayIntermission(true);
+        modifiedSpawnInterval = spawnInterval * 0.5f;
         routineTimer = 0;
 
         while (routineTimer < 10)
@@ -128,9 +131,9 @@ public class ObstacleManager : MonoBehaviour
         testUIManager.DisplayIntermission(false);
         routineTimer = 0;
 
-        while (routineTimer < 3)
+        while (routineTimer < 25)
         {
-            if (intervalTimer >= spawnInterval && thisSequence.fastPatterns.Count != 0)
+            if (intervalTimer >= modifiedSpawnInterval && thisSequence.fastPatterns.Count != 0)
             {
                 GameObject toSpawn = thisSequence.fastPatterns[0];
                 thisSequence.fastPatterns.RemoveAt(0);
