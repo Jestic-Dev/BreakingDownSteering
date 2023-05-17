@@ -51,7 +51,7 @@ public class ObstacleManager : MonoBehaviour
 
         float routineTimer = 0;
         float modifiedSpawnInterval = spawnInterval;
-        float intervalTimer = spawnInterval;
+        float intervalTimer = modifiedSpawnInterval;
 
         testUIManager.HideInstructions();
         gameLogger.StartLogging();
@@ -94,7 +94,7 @@ public class ObstacleManager : MonoBehaviour
         testUIManager.DisplayIntermission(false);
         routineTimer = 0;
 
-        while (routineTimer < 25)
+        while (routineTimer < 24)
         {
             if (intervalTimer >= modifiedSpawnInterval && thisSequence.mediumPatterns.Count != 0)
             {
@@ -131,7 +131,7 @@ public class ObstacleManager : MonoBehaviour
         testUIManager.DisplayIntermission(false);
         routineTimer = 0;
 
-        while (routineTimer < 25)
+        while (routineTimer < 22)
         {
             if (intervalTimer >= modifiedSpawnInterval && thisSequence.fastPatterns.Count != 0)
             {
