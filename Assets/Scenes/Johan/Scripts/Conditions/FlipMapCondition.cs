@@ -18,7 +18,7 @@ public class FlipMapCondition : TestCondition
 
         if (Mathf.Abs(transformedX - rememberX[0]) > moveThreshold)
         {
-            objectToMove.position = (new Vector3(-transformedX, objectToMove.position.y, objectToMove.position.z));
+            objectToMove.position = (new Vector3(transformedX, objectToMove.position.y, objectToMove.position.z));
         }
 
         if (rememberX.Count > 7)

@@ -33,7 +33,7 @@ public class FlipMoveCondition : TestCondition
             handRotation = -maxAngleInput;
         }
 
-        objectToMove.position += new Vector3(-handRotation * (moveSpeed + modeModifier * (GameMaster.speedModifier - 1)) * Time.deltaTime, 0, 0);
+        objectToMove.position += new Vector3(handRotation * (moveSpeed + modeModifier * (GameMaster.speedModifier - 1)) * Time.deltaTime, 0, 0);
 
         CheckObjectBounds(movementBounds);
     }
