@@ -6,6 +6,7 @@ public class MovementCondition : TestCondition
 {
     public float moveSpeed;
     public float modeModifier;
+    public float maxAngleInput;
 
     public override void UpdateCondition(float handRotation, float movementBounds, float deadzoneAngle)
     {
@@ -21,6 +22,15 @@ public class MovementCondition : TestCondition
         else //below deadzone, increase to start speed from 0
         {
             handRotation += deadzoneAngle;
+        }
+
+        if(handRotation > maxAngleInput)
+        {
+            handRotation = maxAngleInput;
+        }
+        else if(handRotation < -maxAngleInput)
+        {
+            handRotation = -maxAngleInput;
         }
 
         objectToMove.position += new Vector3(-handRotation * (moveSpeed + modeModifier * (GameMaster.speedModifier - 1)) * Time.deltaTime, 0, 0);

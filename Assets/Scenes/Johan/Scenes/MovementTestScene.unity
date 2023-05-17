@@ -2394,6 +2394,7 @@ MonoBehaviour:
   objectToMove: {fileID: 1627835351}
   moveSpeed: 0.1
   modeModifier: 0.05
+  maxAngleInput: 45
 --- !u!4 &657139851
 Transform:
   m_ObjectHideFlags: 0
@@ -7943,7 +7944,7 @@ PrefabInstance:
     - target: {fileID: 1062145704785541411, guid: 17dba08746ef68547b61403a99aadbb3, type: 3}
       propertyPath: obstacleSequences.Array.data[0].slowPatterns.Array.data[0]
       value: 
-      objectReference: {fileID: 7625673541225387133, guid: da8fc1ce8e355b0498c4935f7e878522, type: 3}
+      objectReference: {fileID: 7625673541225387133, guid: 699eeda3417f91d40b400dfe65b9ba1a, type: 3}
     - target: {fileID: 1062145704785541411, guid: 17dba08746ef68547b61403a99aadbb3, type: 3}
       propertyPath: obstacleSequences.Array.data[0].slowPatterns.Array.data[1]
       value: 
