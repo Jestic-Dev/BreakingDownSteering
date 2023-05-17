@@ -19,6 +19,10 @@ public class AvatarManager : MonoBehaviour
     public GameObject characterModel;
     public GameObject accesoryModel;
 
+    public bool mapAnimStyle;
+    public bool animateFromTrack;
+    public Transform obstacleTrack;
+
     private void Start()
     {
         animSpeedID = Animator.StringToHash("Speed");
@@ -29,28 +33,56 @@ public class AvatarManager : MonoBehaviour
 
     private void Update()
     {
-        float xDiff = previousX - transform.position.x;
-
-        if(xDiff < 0)
+        if (!animateFromTrack)
         {
-            transform.LookAt(transform.position + Vector3.right);
+            float xDiff = previousX - transform.position.x;
 
-            myAnimator.SetFloat(animSpeedID, 2 + -xDiff * 10);
-        }
-        else if (xDiff > 0)
-        {
-            transform.LookAt(transform.position - Vector3.right);
+            if (xDiff < 0)
+            {
+                transform.LookAt(transform.position + Vector3.right);
 
-            myAnimator.SetFloat(animSpeedID, 2 + xDiff * 20);
+                myAnimator.SetFloat(animSpeedID, mapAnimStyle ? 6 : 2 + -xDiff * 10);
+            }
+            else if (xDiff > 0)
+            {
+                transform.LookAt(transform.position - Vector3.right);
+
+                myAnimator.SetFloat(animSpeedID, mapAnimStyle ? 6 : 2 + xDiff * 10);
+            }
+            else
+            {
+                transform.LookAt(transform.position + Vector3.forward);
+
+                myAnimator.SetFloat(animSpeedID, 0);
+            }
+
+            previousX = transform.position.x;
         }
         else
         {
-            transform.LookAt(transform.position + Vector3.forward);
+            float xDiff = previousX - obstacleTrack.position.x;
 
-            myAnimator.SetFloat(animSpeedID, 0);
+            if (xDiff > 0)
+            {
+                transform.LookAt(transform.position + Vector3.right);
+
+                myAnimator.SetFloat(animSpeedID, mapAnimStyle ? 6 : 2 + -xDiff * 10);
+            }
+            else if (xDiff < 0)
+            {
+                transform.LookAt(transform.position - Vector3.right);
+
+                myAnimator.SetFloat(animSpeedID, mapAnimStyle ? 6 : 2 + xDiff * 10);
+            }
+            else
+            {
+                transform.LookAt(transform.position + Vector3.forward);
+
+                myAnimator.SetFloat(animSpeedID, 0);
+            }
+
+            previousX = obstacleTrack.position.x;
         }
-
-        previousX = transform.position.x;
     }
 
     public void GetHit()

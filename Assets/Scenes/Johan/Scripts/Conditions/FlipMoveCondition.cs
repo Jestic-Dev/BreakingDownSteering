@@ -5,6 +5,8 @@ using UnityEngine;
 public class FlipMoveCondition : TestCondition
 {
     public float moveSpeed;
+    public float modeModifier;
+    public float maxAngleInput;
 
     public override void UpdateCondition(float handRotation, float movementBounds, float deadzoneAngle)
     {
@@ -22,7 +24,16 @@ public class FlipMoveCondition : TestCondition
             handRotation += deadzoneAngle;
         }
 
-        objectToMove.Translate(new Vector3(-handRotation * moveSpeed * GameMaster.speedModifier * Time.deltaTime, 0, 0));
+        if (handRotation > maxAngleInput)
+        {
+            handRotation = maxAngleInput;
+        }
+        else if (handRotation < -maxAngleInput)
+        {
+            handRotation = -maxAngleInput;
+        }
+
+        objectToMove.position += new Vector3(-handRotation * (moveSpeed + modeModifier * (GameMaster.speedModifier - 1)) * Time.deltaTime, 0, 0);
 
         CheckObjectBounds(movementBounds);
     }
