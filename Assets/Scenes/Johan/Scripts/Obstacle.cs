@@ -6,10 +6,11 @@ public class Obstacle : MonoBehaviour
 {
     public float moveSpeed;
     protected float mySpeed = 0;
+    public float speedModifier;
 
     private void Start()
     {
-        mySpeed = moveSpeed * GameMaster.speedModifier;
+        mySpeed = moveSpeed + (speedModifier * (GameMaster.speedModifier - 1));
     }
 
     void Update()

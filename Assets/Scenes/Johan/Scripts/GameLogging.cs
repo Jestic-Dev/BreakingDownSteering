@@ -50,9 +50,9 @@ public class GameLogging : MonoBehaviour
     {
         Dictionary<string, object> loggingData = new Dictionary<string, object>() {
             {"SteeringType", logData.steeringType},
-            {"SpeedModifier", logData.speedModifier},
-            {"AvatarPosition", logData.avatarPosition},
-            {"HandRotation", logData.handRotation},
+            {"SpeedModifier", logData.speedModifier.ToString()},
+            {"AvatarPosition", logData.avatarPosition.ToString()},
+            {"HandRotation", logData.handRotation.ToString()},
             {"HitDetected", logData.hitDetected},
             {"PatternID", logData.patternID}
         };
@@ -92,6 +92,7 @@ public class GameLogging : MonoBehaviour
     public void SetSpeedModifierLevel(float speedModifier)
     {
         logData.speedModifier = speedModifier;
+        Debug.Log("Logging speedmodifier is: " + speedModifier);
     }
 
     public void SetHandRotation(float handRotation)

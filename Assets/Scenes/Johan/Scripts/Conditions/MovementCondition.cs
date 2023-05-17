@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovementCondition : TestCondition
 {
     public float moveSpeed;
+    public float modeModifier;
 
     public override void UpdateCondition(float handRotation, float movementBounds, float deadzoneAngle)
     {
@@ -22,7 +23,7 @@ public class MovementCondition : TestCondition
             handRotation += deadzoneAngle;
         }
 
-        objectToMove.position += new Vector3(-handRotation * moveSpeed * GameMaster.speedModifier * Time.deltaTime, 0, 0);
+        objectToMove.position += new Vector3(-handRotation * (moveSpeed + modeModifier * (GameMaster.speedModifier - 1)) * Time.deltaTime, 0, 0);
 
         CheckObjectBounds(movementBounds);
     }

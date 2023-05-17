@@ -9,15 +9,10 @@ public class ObstacleManager : MonoBehaviour
     public TestUIManager testUIManager;
     public GameLogging gameLogger;
 
-    private Vector3 moveDirection = -Vector3.forward;
-    public float obstacleSpeed;
-    public float destroyDistance; // Distance at which obstacles will be destroyed
-    public float spawnInterval; // Time interval between spawns
+    public float spawnInterval;
     private bool isSpawningObstacles;
 
     private int obstacleHitCount = 0;
-
-    private List<GameObject> spawnedObstacles = new List<GameObject>(); // List to store references to spawned obstacles
 
     public List<ObstacleSequence> obstacleSequences;
 
@@ -40,7 +35,6 @@ public class ObstacleManager : MonoBehaviour
     public void CountHit()
     {
         obstacleHitCount++;
-        Debug.Log(obstacleHitCount);
     }
 
     public IEnumerator ObstacleRoutine()
