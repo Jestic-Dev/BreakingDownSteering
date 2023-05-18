@@ -55,7 +55,7 @@ public class GameLogging : MonoBehaviour
     {
         Dictionary<string, object> loggingData = new Dictionary<string, object>() {
             {"SteeringType", logData.steeringType},
-            {"SewuenceID", logData.sequenceID},
+            {"SequenceID", logData.sequenceID},
             {"SpeedModifier", logData.speedModifier.ToString()},
             {"AvatarPosition", logData.avatarPosition.ToString()},
             {"HandRotation", logData.handRotation.ToString()},
@@ -90,6 +90,8 @@ public class GameLogging : MonoBehaviour
                 "HitTotal"
             });
 
+        logData.totalHandPositionChange = 0;
+        logData.totalHandRotation = 0;
         isLogging = true;
     }
 
