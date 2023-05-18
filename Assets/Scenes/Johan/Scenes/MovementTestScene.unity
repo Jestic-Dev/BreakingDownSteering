@@ -8391,6 +8391,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2407562808469048175, guid: dc81086235d930e4384685d653dfae24, type: 3}
+      propertyPath: m_text
+      value: 'Look down to see the character you will be controlling, your objective
+        is to make sure the character doesn''t get by the incoming objects.
+
+
+        Please
+        press the A or X button on the controller you want to use, test the control
+        method and then press both the Grip and Trigger buttons simultaneously when
+        you are ready to begin.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2407562808469048175, guid: dc81086235d930e4384685d653dfae24, type: 3}
+      propertyPath: m_fontSize
+      value: 46.75
+      objectReference: {fileID: 0}
     - target: {fileID: 3559138390011509322, guid: dc81086235d930e4384685d653dfae24, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -8478,6 +8493,14 @@ PrefabInstance:
     - target: {fileID: 3559138390011509326, guid: dc81086235d930e4384685d653dfae24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559138390136675385, guid: dc81086235d930e4384685d653dfae24, type: 3}
+      propertyPath: m_text
+      value: 'Break time!
+
+
+        The speed has increased, please take this time
+        to test your new movement before the test resumes.'
       objectReference: {fileID: 0}
     - target: {fileID: 8305996852381208482, guid: dc81086235d930e4384685d653dfae24, type: 3}
       propertyPath: m_text
