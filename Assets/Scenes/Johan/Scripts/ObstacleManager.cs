@@ -47,6 +47,8 @@ public class ObstacleManager : MonoBehaviour
         thisSequence.mediumPatterns = new List<GameObject>(obstacleSequences[sequenceID].mediumPatterns);
         thisSequence.fastPatterns = new List<GameObject>(obstacleSequences[sequenceID].fastPatterns);
 
+        gameLogger.SetSequenceID(sequenceID);
+
         List<Transform> myActiveObstacles = new List<Transform>();
 
         float routineTimer = 0;

@@ -22,6 +22,7 @@ public class GameLogging : MonoBehaviour
     private class LogData
     {
         public string steeringType;
+        public int sequenceID;
         public float speedModifier;
         public float avatarPosition;
         public float handRotation;
@@ -54,6 +55,7 @@ public class GameLogging : MonoBehaviour
     {
         Dictionary<string, object> loggingData = new Dictionary<string, object>() {
             {"SteeringType", logData.steeringType},
+            {"SewuenceID", logData.sequenceID},
             {"SpeedModifier", logData.speedModifier.ToString()},
             {"AvatarPosition", logData.avatarPosition.ToString()},
             {"HandRotation", logData.handRotation.ToString()},
@@ -76,6 +78,7 @@ public class GameLogging : MonoBehaviour
         loggingManager.CreateLog("TestTracking", 
             headers: new List<string>() {
                 "SteeringType",
+                "SequenceID",
                 "SpeedModifier",
                 "AvatarPosition",
                 "HandRotation",
@@ -99,6 +102,11 @@ public class GameLogging : MonoBehaviour
     public void SetSteeringType(string steeringType)
     {
         logData.steeringType = steeringType;
+    }
+
+    public void SetSequenceID(int sequenceID)
+    {
+        logData.sequenceID = sequenceID;
     }
 
     public void SetSpeedModifierLevel(float speedModifier)
