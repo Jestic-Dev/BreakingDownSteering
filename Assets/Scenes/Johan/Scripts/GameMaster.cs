@@ -38,6 +38,7 @@ public class GameMaster : MonoBehaviour
     }
     [SerializeField]
     GameControllers gameControllers = new GameControllers();
+    Vector3 prevFrameControllerPos = Vector3.zero;
 
     [System.Serializable]
     private class ControllerInputs
@@ -123,11 +124,13 @@ public class GameMaster : MonoBehaviour
                 }
 
                 UpdateHandRotation();
+                UpdateHandPosition();
                 testCondition.UpdateCondition(handRotation, movementBounds, deadzoneAngle);
                 break;
 
             case GameStates.Testing:
                 UpdateHandRotation();
+                UpdateHandPosition();
                 testCondition.UpdateCondition(handRotation, movementBounds, deadzoneAngle);
                 break;
 
@@ -152,6 +155,23 @@ public class GameMaster : MonoBehaviour
         }
 
         gameLogger.SetHandRotation(handRotation);
+    }
+
+    private void UpdateHandPosition()
+    {
+        if (controllerChoice == ControllerChoice.LeftController)
+        {
+            float posChange = (prevFrameControllerPos - gameControllers.left.position).magnitude;
+            gameLogger.SetHandPositionChange(posChange);
+            prevFrameControllerPos = gameControllers.left.position;
+        }
+
+        if (controllerChoice == ControllerChoice.RightController)
+        {
+            float posChange = (prevFrameControllerPos - gameControllers.right.position).magnitude;
+            gameLogger.SetHandPositionChange(posChange);
+            prevFrameControllerPos = gameControllers.right.position;
+        }
     }
 
     private void ProcessLeftHand()

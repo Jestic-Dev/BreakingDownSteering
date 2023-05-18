@@ -25,9 +25,13 @@ public class GameLogging : MonoBehaviour
         public float speedModifier;
         public float avatarPosition;
         public float handRotation;
+        public float totalHandRotation;
+        public float handPositionChange;
+        public float totalHandPositionChange;
         public bool isIntermission = false;
         public bool hitDetected = false;
-        public int patternID = 0;
+        public int hitPatternID = 0;
+        public int hitTotal = 0;
     }
     private LogData logData = new LogData();
 
@@ -53,14 +57,18 @@ public class GameLogging : MonoBehaviour
             {"SpeedModifier", logData.speedModifier.ToString()},
             {"AvatarPosition", logData.avatarPosition.ToString()},
             {"HandRotation", logData.handRotation.ToString()},
+            {"TotalHandRotation", logData.totalHandRotation.ToString()},
+            {"HandPositionChange", logData.handPositionChange.ToString()},
+            {"TotalHandPositionChange", logData.totalHandPositionChange.ToString()},
             {"HitDetected", logData.hitDetected},
-            {"PatternID", logData.patternID}
+            {"PatternID", logData.hitPatternID},
+            {"HitTotal", logData.hitTotal}
         };
 
         loggingManager.Log("TestTracking", loggingData);
 
         logData.hitDetected = false;
-        logData.patternID = 0;
+        logData.hitPatternID = 0;
     }
 
     public void StartLogging()
@@ -71,8 +79,12 @@ public class GameLogging : MonoBehaviour
                 "SpeedModifier",
                 "AvatarPosition",
                 "HandRotation",
+                "TotalHandRotation",
+                "HandPositionChange",
+                "TotalHandPositionChange",
                 "HitDetected", 
-                "PatternID"
+                "HitPatternID",
+                "HitTotal"
             });
 
         isLogging = true;
@@ -98,6 +110,13 @@ public class GameLogging : MonoBehaviour
     public void SetHandRotation(float handRotation)
     {
         logData.handRotation = handRotation;
+        logData.totalHandRotation += handRotation;
+    }
+
+    public void SetHandPositionChange(float handPositionChange)
+    {
+        logData.handPositionChange = handPositionChange;
+        logData.totalHandPositionChange += handPositionChange;
     }
 
     public void SetIntermission(bool isIntermission)
@@ -113,6 +132,7 @@ public class GameLogging : MonoBehaviour
     public void RegisterHit(int patternID)
     {
         logData.hitDetected = true;
-        logData.patternID = patternID;
+        logData.hitPatternID = patternID;
+        logData.hitTotal++;
     }
 }
