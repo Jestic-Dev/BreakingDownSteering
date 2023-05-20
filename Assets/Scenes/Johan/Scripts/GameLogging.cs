@@ -63,7 +63,7 @@ public class GameLogging : MonoBehaviour
             {"HandPositionChange", logData.handPositionChange.ToString()},
             {"TotalHandPositionChange", logData.totalHandPositionChange.ToString()},
             {"HitDetected", logData.hitDetected},
-            {"PatternID", logData.hitPatternID},
+            {"HitPatternID", logData.hitPatternID},
             {"HitTotal", logData.hitTotal}
         };
 
