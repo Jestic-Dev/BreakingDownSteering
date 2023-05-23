@@ -83,6 +83,7 @@ public class ObstacleManager : MonoBehaviour
 
         //Medium speed
         gameMaster.SetSpeedModifier(2);
+        gameLogger.SetIntermission(true);
         testUIManager.DisplayIntermission(true);
         routineTimer = 0;
         modifiedSpawnInterval = spawnInterval * 0.75f;
@@ -93,6 +94,7 @@ public class ObstacleManager : MonoBehaviour
             routineTimer += Time.deltaTime;
         }
 
+        gameLogger.SetIntermission(false);
         testUIManager.DisplayIntermission(false);
         routineTimer = 0;
 
@@ -120,6 +122,7 @@ public class ObstacleManager : MonoBehaviour
 
         //High speed
         gameMaster.SetSpeedModifier(3);
+        gameLogger.SetIntermission(true);
         testUIManager.DisplayIntermission(true);
         modifiedSpawnInterval = spawnInterval * 0.5f;
         routineTimer = 0;
@@ -130,6 +133,7 @@ public class ObstacleManager : MonoBehaviour
             routineTimer += Time.deltaTime;
         }
 
+        gameLogger.SetIntermission(false);
         testUIManager.DisplayIntermission(false);
         routineTimer = 0;
 

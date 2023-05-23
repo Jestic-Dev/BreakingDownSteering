@@ -33,6 +33,7 @@ public class GameLogging : MonoBehaviour
         public bool hitDetected = false;
         public int hitPatternID = 0;
         public int hitTotal = 0;
+        public int currentPatternID = 0;
     }
     private LogData logData = new LogData();
 
@@ -57,14 +58,21 @@ public class GameLogging : MonoBehaviour
             {"SteeringType", logData.steeringType},
             {"SequenceID", logData.sequenceID},
             {"SpeedModifier", logData.speedModifier.ToString()},
-            {"AvatarPosition", logData.avatarPosition.ToString()},
-            {"HandRotation", logData.handRotation.ToString()},
-            {"TotalHandRotation", logData.totalHandRotation.ToString()},
-            {"HandPositionChange", logData.handPositionChange.ToString()},
-            {"TotalHandPositionChange", logData.totalHandPositionChange.ToString()},
+            {"AvatarPosition", logData.avatarPosition},
+            {"AvatarPositionStr", logData.avatarPosition.ToString()},
+            {"HandRotation", logData.handRotation},
+            {"HandRotationStr", logData.handRotation.ToString()},
+            {"TotalHandRotation", logData.totalHandRotation},
+            {"TotalHandRotationStr", logData.totalHandRotation.ToString()},
+            {"HandPositionChange", logData.handPositionChange},
+            {"HandPositionChangeStr", logData.handPositionChange.ToString()},
+            {"TotalHandPositionChange", logData.totalHandPositionChange},
+            {"TotalHandPositionChangeStr", logData.totalHandPositionChange.ToString()},
             {"HitDetected", logData.hitDetected},
             {"HitPatternID", logData.hitPatternID},
-            {"HitTotal", logData.hitTotal}
+            {"HitTotal", logData.hitTotal},
+            {"IsIntermission", logData.isIntermission},
+            {"CurrentPatternID", logData.currentPatternID}
         };
 
         loggingManager.Log("TestTracking", loggingData);
@@ -81,13 +89,20 @@ public class GameLogging : MonoBehaviour
                 "SequenceID",
                 "SpeedModifier",
                 "AvatarPosition",
+                "AvatarPositionStr",
                 "HandRotation",
+                "HandRotationStr",
                 "TotalHandRotation",
+                "TotalHandRotationStr",
                 "HandPositionChange",
+                "HandPositionChangeStr",
                 "TotalHandPositionChange",
+                "TotalHandPositionChangeStr",
                 "HitDetected", 
                 "HitPatternID",
-                "HitTotal"
+                "HitTotal",
+                "IsIntermission",
+                "CurrentPatternID"
             });
 
         logData.totalHandPositionChange = 0;
@@ -144,5 +159,15 @@ public class GameLogging : MonoBehaviour
         logData.hitDetected = true;
         logData.hitPatternID = patternID;
         logData.hitTotal++;
+    }
+
+    public void RegisterPatternStart(int patternID)
+    {
+        logData.currentPatternID = patternID;
+    }
+
+    public void RegisterPatternEnd()
+    {
+        logData.currentPatternID = 0;
     }
 }

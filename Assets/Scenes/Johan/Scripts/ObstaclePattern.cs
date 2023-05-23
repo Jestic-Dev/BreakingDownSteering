@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,5 +28,15 @@ public class ObstaclePattern : MonoBehaviour
         Debug.Log("Pattern hit");
         gameLogger.RegisterHit(patternID);
         obstacleSpawner.CountHit();
+    }
+
+    internal void RegisterPatternStart()
+    {
+        gameLogger.RegisterPatternStart(patternID);
+    }
+
+    internal void RegisterPatternEnd()
+    {
+        gameLogger.RegisterPatternEnd();
     }
 }
