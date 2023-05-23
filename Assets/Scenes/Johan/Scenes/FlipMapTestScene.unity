@@ -2425,6 +2425,7 @@ MonoBehaviour:
   baseMapAngle: 45
   mapAngleScaler: 22.5
   moveThreshold: 0.2
+  rotationThreshold: 1
 --- !u!1 &690169896
 GameObject:
   m_ObjectHideFlags: 0

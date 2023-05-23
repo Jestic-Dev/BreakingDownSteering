@@ -9,6 +9,8 @@ public class MappingCondition : TestCondition
     public float mapAngleScaler;
     private List<float> rememberX = new List<float>();
     public float moveThreshold;
+    private float rememberRotation;
+    public float rotationThreshold;
 
     private float mapAngle { get { return baseMapAngle + mapAngleScaler * (GameMaster.speedModifier - 1); } }
 
@@ -17,9 +19,11 @@ public class MappingCondition : TestCondition
         float transformedX = handRotation / mapAngle * movementBounds;
         rememberX.Add(transformedX);
 
-        if (Mathf.Abs(transformedX - rememberX[0]) > moveThreshold)
+        if (Mathf.Abs(transformedX - rememberX[0]) > moveThreshold
+            || Mathf.Abs(handRotation - rememberRotation) > rotationThreshold)
         {
             objectToMove.position = (new Vector3(-transformedX, objectToMove.position.y, objectToMove.position.z));
+            rememberRotation = handRotation;
         }
 
         if(rememberX.Count > 7)
